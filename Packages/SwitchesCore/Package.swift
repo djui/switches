@@ -1,0 +1,17 @@
+// swift-tools-version: 6.0
+import PackageDescription
+
+let package = Package(
+    name: "SwitchesCore",
+    platforms: [.macOS(.v15)],
+    products: [
+        .library(name: "SwitchesCore", targets: ["SwitchesCore"])
+    ],
+    targets: [
+        .target(name: "SwitchesCore"),
+        .testTarget(
+            name: "SwitchesCoreTests",
+            dependencies: ["SwitchesCore"]
+        )
+    ]
+)

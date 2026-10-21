@@ -1,0 +1,29 @@
+# GateGuard facts (first touch):
+# 1. Callers: git (status/add/commit) reads this; no Swift source imports it. Delivery scripts rely on ignored build/ and *.xcodeproj.
+# 2. Coverage: no existing .gitignore in repo (only Sounds/ present).
+# 3. Data: N/A — ignore patterns only, no structured data I/O.
+# 4. User instruction: "Implement the plan as specified, it is attached for your reference. Do NOT edit the plan file itself."
+
+# Xcode / XcodeGen
+*.xcodeproj/
+*.xcworkspace/
+xcuserdata/
+DerivedData/
+*.xcarchive
+
+# Swift / SPM
+.build/
+Packages/**/.build/
+
+# Build outputs
+build/
+dist/
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Misc
+*.swp
+*~
+.idea/

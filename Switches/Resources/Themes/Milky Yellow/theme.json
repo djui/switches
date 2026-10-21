@@ -1,0 +1,244 @@
+{
+  "channels" : 1,
+  "fallbacks" : {
+    "alpha" : 0,
+    "backspace" : 51,
+    "enter" : 36,
+    "modifier" : 56,
+    "space" : 49
+  },
+  "formatVersion" : 1,
+  "keys" : {
+    "0" : {
+      "down" : "0-down.caf",
+      "up" : "0-up.caf"
+    },
+    "1" : {
+      "down" : "1-down.caf",
+      "up" : "1-up.caf"
+    },
+    "11" : {
+      "down" : "11-down.caf",
+      "up" : "11-up.caf"
+    },
+    "12" : {
+      "down" : "12-down.caf",
+      "up" : "12-up.caf"
+    },
+    "123" : {
+      "down" : "123-down.caf",
+      "up" : "123-up.caf"
+    },
+    "124" : {
+      "down" : "124-down.caf",
+      "up" : "124-up.caf"
+    },
+    "125" : {
+      "down" : "125-down.caf",
+      "up" : "125-up.caf"
+    },
+    "126" : {
+      "down" : "126-down.caf",
+      "up" : "126-up.caf"
+    },
+    "13" : {
+      "down" : "13-down.caf",
+      "up" : "13-up.caf"
+    },
+    "14" : {
+      "down" : "14-down.caf",
+      "up" : "14-up.caf"
+    },
+    "15" : {
+      "down" : "15-down.caf",
+      "up" : "15-up.caf"
+    },
+    "16" : {
+      "down" : "16-down.caf",
+      "up" : "16-up.caf"
+    },
+    "17" : {
+      "down" : "17-down.caf",
+      "up" : "17-up.caf"
+    },
+    "18" : {
+      "down" : "18-down.caf",
+      "up" : "18-up.caf"
+    },
+    "19" : {
+      "down" : "19-down.caf",
+      "up" : "19-up.caf"
+    },
+    "20" : {
+      "down" : "20-down.caf",
+      "up" : "20-up.caf"
+    },
+    "21" : {
+      "down" : "21-down.caf",
+      "up" : "21-up.caf"
+    },
+    "22" : {
+      "down" : "22-down.caf",
+      "up" : "22-up.caf"
+    },
+    "23" : {
+      "down" : "23-down.caf",
+      "up" : "23-up.caf"
+    },
+    "24" : {
+      "down" : "24-down.caf",
+      "up" : "24-up.caf"
+    },
+    "25" : {
+      "down" : "25-down.caf",
+      "up" : "25-up.caf"
+    },
+    "26" : {
+      "down" : "26-down.caf",
+      "up" : "26-up.caf"
+    },
+    "27" : {
+      "down" : "27-down.caf",
+      "up" : "27-up.caf"
+    },
+    "28" : {
+      "down" : "28-down.caf",
+      "up" : "28-up.caf"
+    },
+    "29" : {
+      "down" : "29-down.caf",
+      "up" : "29-up.caf"
+    },
+    "30" : {
+      "down" : "30-down.caf",
+      "up" : "30-up.caf"
+    },
+    "31" : {
+      "down" : "31-down.caf",
+      "up" : "31-up.caf"
+    },
+    "32" : {
+      "down" : "32-down.caf",
+      "up" : "32-up.caf"
+    },
+    "33" : {
+      "down" : "33-down.caf",
+      "up" : "33-up.caf"
+    },
+    "34" : {
+      "down" : "34-down.caf",
+      "up" : "34-up.caf"
+    },
+    "35" : {
+      "down" : "35-down.caf",
+      "up" : "35-up.caf"
+    },
+    "36" : {
+      "down" : "36-down.caf",
+      "up" : "36-up.caf"
+    },
+    "37" : {
+      "down" : "37-down.caf",
+      "up" : "37-up.caf"
+    },
+    "38" : {
+      "down" : "38-down.caf",
+      "up" : "38-up.caf"
+    },
+    "39" : {
+      "down" : "39-down.caf",
+      "up" : "39-up.caf"
+    },
+    "4" : {
+      "down" : "4-down.caf",
+      "up" : "4-up.caf"
+    },
+    "40" : {
+      "down" : "40-down.caf",
+      "up" : "40-up.caf"
+    },
+    "41" : {
+      "down" : "41-down.caf",
+      "up" : "41-up.caf"
+    },
+    "42" : {
+      "down" : "42-down.caf",
+      "up" : "42-up.caf"
+    },
+    "43" : {
+      "down" : "43-down.caf",
+      "up" : "43-up.caf"
+    },
+    "44" : {
+      "down" : "44-down.caf",
+      "up" : "44-up.caf"
+    },
+    "45" : {
+      "down" : "45-down.caf",
+      "up" : "45-up.caf"
+    },
+    "46" : {
+      "down" : "46-down.caf",
+      "up" : "46-up.caf"
+    },
+    "47" : {
+      "down" : "47-down.caf",
+      "up" : "47-up.caf"
+    },
+    "48" : {
+      "down" : "48-down.caf",
+      "up" : "48-up.caf"
+    },
+    "49" : {
+      "down" : "49-down.caf",
+      "up" : "49-up.caf"
+    },
+    "51" : {
+      "down" : "51-down.caf",
+      "up" : "51-up.caf"
+    },
+    "53" : {
+      "down" : "53-down.caf",
+      "up" : "53-up.caf"
+    },
+    "55" : {
+      "down" : "55-down.caf",
+      "up" : "55-up.caf"
+    },
+    "56" : {
+      "down" : "56-down.caf",
+      "up" : "56-up.caf"
+    },
+    "57" : {
+      "down" : "57-down.caf",
+      "up" : "57-up.caf"
+    },
+    "58" : {
+      "down" : "58-down.caf",
+      "up" : "58-up.caf"
+    },
+    "59" : {
+      "down" : "59-down.caf",
+      "up" : "59-up.caf"
+    },
+    "6" : {
+      "down" : "6-down.caf",
+      "up" : "6-up.caf"
+    },
+    "7" : {
+      "down" : "7-down.caf",
+      "up" : "7-up.caf"
+    },
+    "8" : {
+      "down" : "8-down.caf",
+      "up" : "8-up.caf"
+    },
+    "9" : {
+      "down" : "9-down.caf",
+      "up" : "9-up.caf"
+    }
+  },
+  "name" : "Milky Yellow",
+  "sampleRate" : 48000,
+  "source" : "per-key-wav"
+}

@@ -1,0 +1,45 @@
+# GateGuard: 1) XcodeGen reads this on `xcodegen generate` / make build. 2) Defines Switches macOS app target + SwitchesCore package dep, version 0.1.0. 3) No secrets. 4) User: "Implement the plan as specified..."
+name: Switches
+options:
+  bundleIdPrefix: com.djui
+  deploymentTarget:
+    macOS: "15.0"
+  createIntermediateGroups: true
+  xcodeVersion: "16.0"
+settings:
+  base:
+    MARKETING_VERSION: "0.1.0"
+    CURRENT_PROJECT_VERSION: 1
+    SWIFT_VERSION: "6.0"
+    MACOSX_DEPLOYMENT_TARGET: "15.0"
+packages:
+  SwitchesCore:
+    path: Packages/SwitchesCore
+targets:
+  Switches:
+    type: application
+    platform: macOS
+    sources:
+      - path: Switches
+        excludes:
+          - "Resources/Themes"
+          - "Resources/Themes/**"
+          - "Info.plist"
+          - "Switches.entitlements"
+      - path: Switches/Resources/Themes
+        type: folder
+        buildPhase: resources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.djui.Switches
+        PRODUCT_NAME: Switches
+        INFOPLIST_FILE: Switches/Info.plist
+        CODE_SIGN_ENTITLEMENTS: Switches/Switches.entitlements
+        CODE_SIGN_STYLE: Automatic
+        ENABLE_HARDENED_RUNTIME: YES
+        COMBINE_HIDPI_IMAGES: YES
+        LD_RUNPATH_SEARCH_PATHS: "@executable_path/../Frameworks"
+        GENERATE_INFOPLIST_FILE: NO
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+    dependencies:
+      - package: SwitchesCore
