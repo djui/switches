@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Switches — Mechanical keyboard sounds for macOS</title>
+  <meta name="description" content="A native macOS menu bar app that turns every keystroke into a high-fidelity mechanical switch sound — spatial, instant, and pauseable." />
+  <meta property="og:title" content="Switches" />
+  <meta property="og:description" content="Mechanical keyboard sounds for macOS. Native. Spatial. Instant." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- GateGuard facts: 1) GitHub Pages serves this as site root from /docs; browsers load it. 2) No existing docs/index.html. 3) Static HTML only — no data I/O schemas. 4) User: "After plan is implemented: create a nice modern landing page, hosted on github pages." -->
+  <div class="noise" aria-hidden="true"></div>
+
+  <header class="top">
+    <a class="mark" href="#top">Switches</a>
+    <nav>
+      <a href="#themes">Themes</a>
+      <a href="#features">Features</a>
+      <a class="nav-cta" href="https://github.com/djui/switches/releases/latest">Download</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="brand">Switches</p>
+        <h1>Every keystroke, a real switch.</h1>
+        <p class="lede">A native macOS menu bar app that plays high-fidelity mechanical keyboard sounds — spatial, instant, and quiet when you need it.</p>
+        <div class="cta-row">
+          <a class="btn primary" href="https://github.com/djui/switches/releases/latest">Download for Mac</a>
+          <a class="btn ghost" href="https://github.com/djui/switches">View on GitHub</a>
+        </div>
+      </div>
+      <div class="hero-stage" aria-hidden="true">
+        <div class="desk">
+          <svg class="keyboard" viewBox="0 0 640 220" role="img">
+            <defs>
+              <linearGradient id="keyFace" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#2a2d36" />
+                <stop offset="100%" stop-color="#1a1c22" />
+              </linearGradient>
+              <linearGradient id="brass" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#e2c089" />
+                <stop offset="100%" stop-color="#9a7340" />
+              </linearGradient>
+            </defs>
+            <rect class="plate" x="8" y="18" width="624" height="184" rx="14" />
+            <g class="row" data-row="0">
+              <rect class="key" x="24" y="34" width="36" height="36" rx="6" /><rect class="key" x="68" y="34" width="36" height="36" rx="6" /><rect class="key" x="112" y="34" width="36" height="36" rx="6" /><rect class="key" x="156" y="34" width="36" height="36" rx="6" /><rect class="key" x="200" y="34" width="36" height="36" rx="6" /><rect class="key accent" x="244" y="34" width="36" height="36" rx="6" /><rect class="key" x="288" y="34" width="36" height="36" rx="6" /><rect class="key" x="332" y="34" width="36" height="36" rx="6" /><rect class="key" x="376" y="34" width="36" height="36" rx="6" /><rect class="key" x="420" y="34" width="36" height="36" rx="6" /><rect class="key" x="464" y="34" width="36" height="36" rx="6" /><rect class="key wide" x="508" y="34" width="108" height="36" rx="6" />
+            </g>
+            <g class="row" data-row="1">
+              <rect class="key wide" x="24" y="78" width="54" height="36" rx="6" /><rect class="key" x="86" y="78" width="36" height="36" rx="6" /><rect class="key" x="130" y="78" width="36" height="36" rx="6" /><rect class="key" x="174" y="78" width="36" height="36" rx="6" /><rect class="key" x="218" y="78" width="36" height="36" rx="6" /><rect class="key" x="262" y="78" width="36" height="36" rx="6" /><rect class="key" x="306" y="78" width="36" height="36" rx="6" /><rect class="key" x="350" y="78" width="36" height="36" rx="6" /><rect class="key" x="394" y="78" width="36" height="36" rx="6" /><rect class="key" x="438" y="78" width="36" height="36" rx="6" /><rect class="key" x="482" y="78" width="36" height="36" rx="6" /><rect class="key wide" x="526" y="78" width="90" height="36" rx="6" />
+            </g>
+            <g class="row" data-row="2">
+              <rect class="key wide" x="24" y="122" width="64" height="36" rx="6" /><rect class="key" x="96" y="122" width="36" height="36" rx="6" /><rect class="key" x="140" y="122" width="36" height="36" rx="6" /><rect class="key accent" x="184" y="122" width="36" height="36" rx="6" /><rect class="key" x="228" y="122" width="36" height="36" rx="6" /><rect class="key" x="272" y="122" width="36" height="36" rx="6" /><rect class="key" x="316" y="122" width="36" height="36" rx="6" /><rect class="key" x="360" y="122" width="36" height="36" rx="6" /><rect class="key" x="404" y="122" width="36" height="36" rx="6" /><rect class="key" x="448" y="122" width="36" height="36" rx="6" /><rect class="key wide" x="492" y="122" width="124" height="36" rx="6" />
+            </g>
+            <g class="row" data-row="3">
+              <rect class="key wide" x="24" y="166" width="86" height="36" rx="6" /><rect class="key" x="118" y="166" width="36" height="36" rx="6" /><rect class="key" x="162" y="166" width="36" height="36" rx="6" /><rect class="key" x="206" y="166" width="36" height="36" rx="6" /><rect class="key space" x="250" y="166" width="200" height="36" rx="6" /><rect class="key" x="458" y="166" width="36" height="36" rx="6" /><rect class="key" x="502" y="166" width="36" height="36" rx="6" /><rect class="key wide" x="546" y="166" width="70" height="36" rx="6" />
+            </g>
+          </svg>
+          <div class="sound-wave" id="wave"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band how" id="how">
+      <h2>Type. Hear the switch.</h2>
+      <p>Switches listens for key down and key up, then plays the matching sample from the side of the stereo field that matches the key — left keys left, right keys right — with a touch of random pitch so nothing repeats the same way twice.</p>
+    </section>
+
+    <section class="themes" id="themes">
+      <h2>Sample the switches</h2>
+      <p class="section-lede">Ten themes, converted to fast native audio. Pick one from the menu bar.</p>
+      <ul class="theme-list">
+        <li><span class="swatch cardboard"></span>Cardboard</li>
+        <li><span class="swatch milky"></span>Milky Yellow</li>
+        <li><span class="swatch mx-blue"></span>Cherry MX Blue ABS / PBT</li>
+        <li><span class="swatch mx-brown"></span>Cherry MX Brown ABS / PBT</li>
+        <li><span class="swatch mx-red"></span>Cherry MX Red ABS / PBT</li>
+        <li><span class="swatch mx-black"></span>Cherry MX Black ABS / PBT</li>
+      </ul>
+    </section>
+
+    <section class="features" id="features">
+      <h2>Built to disappear into the bar</h2>
+      <ul class="feature-list">
+        <li>
+          <h3>Spatial &amp; instant</h3>
+          <p>Low-latency native audio engine. Key position drives stereo pan; pitch and gain vary slightly on every press.</p>
+        </li>
+        <li>
+          <h3>Pause when it matters</h3>
+          <p>One click, ⌃⌥⌘K, or auto-pause for games, full-screen apps, and password fields.</p>
+        </li>
+        <li>
+          <h3>Yours to tune</h3>
+          <p>Volume and launch at login in Settings. Theme, stereo width, and variation live next to the menu bar controls.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="footer-cta">
+      <h2>Put switches under your fingers.</h2>
+      <p>macOS 15+. Grant Input Monitoring once — Switches never records what you type.</p>
+      <a class="btn primary" href="https://github.com/djui/switches/releases/latest">Download latest release</a>
+    </section>
+  </main>
+
+  <footer class="site-foot">
+    <span>Switches</span>
+    <a href="https://github.com/djui/switches">GitHub</a>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

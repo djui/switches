@@ -1,5 +1,8 @@
 # Switches
 
+<!-- GateGuard: supersedes nothing — edits existing README; linked from GitHub repo home; user asked for GH Pages landing. -->
+Landing page: [djui.github.io/switches](https://djui.github.io/switches/) (served from `/docs` via GitHub Pages).
+
 A native macOS menu bar app that plays mechanical keyboard sounds on every key press and
 release. Each key sounds from where it sits on the keyboard (left keys on the left, right
 keys on the right), with small random pitch and volume changes so typing never sounds
@@ -101,5 +104,18 @@ Switches/                       App target: SwitchesApp, UI/, Assets, Info.plist
 Switches/Resources/Themes/      Converted themes bundled into the app
 Packages/SwitchesCore/          Audio/, Input/, Packs/, Control/ + unit tests
 Sounds/                         Raw source packs (conversion input only)
+docs/                           GitHub Pages landing site
 scripts/                        convert_sounds, make_icons, build/install/release
 ```
+
+## Website (GitHub Pages)
+
+Static site in [`docs/`](docs/). Enable once:
+
+1. Repo **Settings → Pages**
+2. Source: **Deploy from a branch**
+3. Branch: `main` / folder `/docs`
+
+Or via CLI: `gh api -X PUT repos/djui/switches/pages -f build_type=legacy -f source[branch]=main -f source[path]=/docs`
+
+Site URL: https://djui.github.io/switches/
