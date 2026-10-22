@@ -1,0 +1,13 @@
+<!-- Linked from docs/index.html <link rel="icon">. No prior favicon. Static SVG asset. User: "And, it has not favicon - give it one." -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Switches">
+  <rect width="32" height="32" rx="7" fill="#12151c"/>
+  <rect x="5" y="5" width="22" height="22" rx="5" fill="#1a1c22" stroke="#c9a36a" stroke-width="1.25"/>
+  <rect x="8" y="8" width="16" height="13" rx="3" fill="url(#face)"/>
+  <rect x="11" y="22.5" width="10" height="2.2" rx="1" fill="#9a7340"/>
+  <defs>
+    <linearGradient id="face" x1="8" y1="8" x2="8" y2="21" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#e2c089"/>
+      <stop offset="1" stop-color="#9a7340"/>
+    </linearGradient>
+  </defs>
+</svg>
