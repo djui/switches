@@ -14,8 +14,9 @@ robotic.
 - Themes: Cardboard, Milky Yellow and eight Cherry MX packs (Black/Blue/Brown/Red, ABS/PBT)
 - Pausing: menu toggle, global hotkey **⌃⌥⌘K**, excluded apps, games, full-screen apps and
   secure text entry
-- Settings: volume, theme, stereo width, headphone mode, pitch/volume variation, key-up
-  level, keyboard layout (ANSI/ISO/JIS), launch at login
+- Settings: volume, theme, stereo width, headphone mode, tone (pitch, bass, treble),
+  pitch/volume variation, key-up level (each group with Reset), keyboard layout
+  (ANSI/ISO/JIS), launch at login
 
 ## Requirements
 

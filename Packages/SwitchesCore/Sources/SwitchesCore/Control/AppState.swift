@@ -12,6 +12,9 @@ public final class AppState {
         public static let pitchVariance = "pitchVariance"
         public static let volumeVarianceDb = "volumeVarianceDb"
         public static let upGainDb = "upGainDb"
+        public static let pitchSemitones = "pitchSemitones"
+        public static let bassDb = "bassDb"
+        public static let trebleDb = "trebleDb"
         public static let ignoreAutorepeat = "ignoreAutorepeat"
         public static let headphoneMode = "headphoneMode"
         public static let keyboardLayout = "keyboardLayout"
@@ -21,6 +24,16 @@ public final class AppState {
         public static let pauseInFullscreen = "pauseInFullscreen"
         public static let pauseOnSecureInput = "pauseOnSecureInput"
         public static let hotkeyEnabled = "hotkeyEnabled"
+    }
+
+    /// Factory values restored by the Reset buttons.
+    public enum Defaults {
+        public static let pitchVariance = 0.03
+        public static let volumeVarianceDb = 1.5
+        public static let upGainDb = -4.0
+        public static let pitchSemitones = 0.0
+        public static let bassDb = 0.0
+        public static let trebleDb = 0.0
     }
 
     /// 0...1, perceptual; the mixer gain is `volume²`.
@@ -45,6 +58,18 @@ public final class AppState {
     /// Key-up level relative to key-down in dB.
     public var upGainDb: Double {
         didSet { defaults.set(upGainDb, forKey: Keys.upGainDb); changed() }
+    }
+    /// Fixed pitch shift of all sounds in semitones (negative = lower).
+    public var pitchSemitones: Double {
+        didSet { defaults.set(pitchSemitones, forKey: Keys.pitchSemitones); changed() }
+    }
+    /// Low-shelf gain in dB.
+    public var bassDb: Double {
+        didSet { defaults.set(bassDb, forKey: Keys.bassDb); changed() }
+    }
+    /// High-shelf gain in dB.
+    public var trebleDb: Double {
+        didSet { defaults.set(trebleDb, forKey: Keys.trebleDb); changed() }
     }
     public var ignoreAutorepeat: Bool {
         didSet { defaults.set(ignoreAutorepeat, forKey: Keys.ignoreAutorepeat); changed() }
@@ -89,9 +114,12 @@ public final class AppState {
         defaults.register(defaults: [
             Keys.volume: 0.8,
             Keys.spatialWidth: 0.7,
-            Keys.pitchVariance: 0.03,
-            Keys.volumeVarianceDb: 1.5,
-            Keys.upGainDb: -4.0,
+            Keys.pitchVariance: Defaults.pitchVariance,
+            Keys.volumeVarianceDb: Defaults.volumeVarianceDb,
+            Keys.upGainDb: Defaults.upGainDb,
+            Keys.pitchSemitones: Defaults.pitchSemitones,
+            Keys.bassDb: Defaults.bassDb,
+            Keys.trebleDb: Defaults.trebleDb,
             Keys.ignoreAutorepeat: true,
             Keys.headphoneMode: false,
             Keys.keyboardLayout: KeyboardLayoutKind.detectSystem().rawValue,
@@ -108,6 +136,9 @@ public final class AppState {
         pitchVariance = defaults.double(forKey: Keys.pitchVariance)
         volumeVarianceDb = defaults.double(forKey: Keys.volumeVarianceDb)
         upGainDb = defaults.double(forKey: Keys.upGainDb)
+        pitchSemitones = defaults.double(forKey: Keys.pitchSemitones)
+        bassDb = defaults.double(forKey: Keys.bassDb)
+        trebleDb = defaults.double(forKey: Keys.trebleDb)
         ignoreAutorepeat = defaults.bool(forKey: Keys.ignoreAutorepeat)
         headphoneMode = defaults.bool(forKey: Keys.headphoneMode)
         keyboardLayout = KeyboardLayoutKind(rawValue: defaults.string(forKey: Keys.keyboardLayout) ?? "") ?? .ansi
@@ -117,6 +148,18 @@ public final class AppState {
         pauseInFullscreen = defaults.bool(forKey: Keys.pauseInFullscreen)
         pauseOnSecureInput = defaults.bool(forKey: Keys.pauseOnSecureInput)
         hotkeyEnabled = defaults.bool(forKey: Keys.hotkeyEnabled)
+    }
+
+    public func resetVariation() {
+        pitchVariance = Defaults.pitchVariance
+        volumeVarianceDb = Defaults.volumeVarianceDb
+        upGainDb = Defaults.upGainDb
+    }
+
+    public func resetTone() {
+        pitchSemitones = Defaults.pitchSemitones
+        bassDb = Defaults.bassDb
+        trebleDb = Defaults.trebleDb
     }
 
     public var masterGain: Float {

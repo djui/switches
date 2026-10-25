@@ -28,6 +28,8 @@ public final class VoiceMixer: @unchecked Sendable {
     private let targetGainBits = Atomic<UInt32>(Float(0.64).bitPattern)
     private let generation = Atomic<UInt32>(0)
     private let headphoneMode = Atomic<Bool>(false)
+    private let bassDbBits = Atomic<UInt32>(Float(0).bitPattern)
+    private let trebleDbBits = Atomic<UInt32>(Float(0).bitPattern)
 
     // Audio-thread state. `outputSampleRate` and `smoothing` change only while not rendering.
     private var currentGain: Float = 0.64
@@ -35,6 +37,11 @@ public final class VoiceMixer: @unchecked Sendable {
     private var ageCounter: UInt64 = 0
     private var outputSampleRate = 48_000.0
     private var smoothing: Float = 0
+    private var toneL = ToneFilter()
+    private var toneR = ToneFilter()
+    private var appliedBassDb: Float = 0
+    private var appliedTrebleDb: Float = 0
+    private var toneActive = false
 
     public init(queueCapacity: Int = 256) {
         queue = TriggerQueue(capacity: queueCapacity)
@@ -63,6 +70,12 @@ public final class VoiceMixer: @unchecked Sendable {
         headphoneMode.store(enabled, ordering: .relaxed)
     }
 
+    /// Low-shelf (bass) and high-shelf (treble) gain in dB; 0 bypasses the filter.
+    public func setTone(bassDb: Float, trebleDb: Float) {
+        bassDbBits.store(bassDb.bitPattern, ordering: .relaxed)
+        trebleDbBits.store(trebleDb.bitPattern, ordering: .relaxed)
+    }
+
     /// Invalidates all playing voices and queued triggers (used when swapping sample banks).
     @discardableResult
     public func advanceGeneration() -> UInt32 {
@@ -78,6 +91,17 @@ public final class VoiceMixer: @unchecked Sendable {
         outputSampleRate = sampleRate > 0 ? sampleRate : 48_000
         smoothing = Float(1 - exp(-1 / (0.010 * outputSampleRate)))
         for i in 0..<Self.maxVoices { voices[i].active = false }
+        configureTone(bassDb: appliedBassDb, trebleDb: appliedTrebleDb)
+        toneL.reset()
+        toneR.reset()
+    }
+
+    private func configureTone(bassDb: Float, trebleDb: Float) {
+        appliedBassDb = bassDb
+        appliedTrebleDb = trebleDb
+        toneActive = bassDb != 0 || trebleDb != 0
+        toneL.configure(bassDb: Double(bassDb), trebleDb: Double(trebleDb), sampleRate: outputSampleRate)
+        toneR.configure(bassDb: Double(bassDb), trebleDb: Double(trebleDb), sampleRate: outputSampleRate)
     }
 
     // MARK: Render (audio thread)
@@ -108,10 +132,25 @@ public final class VoiceMixer: @unchecked Sendable {
             mix(voices + i, left, r, frameCount)
         }
 
+        let bassDb = Float(bitPattern: bassDbBits.load(ordering: .relaxed))
+        let trebleDb = Float(bitPattern: trebleDbBits.load(ordering: .relaxed))
+        if bassDb != appliedBassDb || trebleDb != appliedTrebleDb {
+            configureTone(bassDb: bassDb, trebleDb: trebleDb)
+        }
+
         let target = Float(bitPattern: targetGainBits.load(ordering: .relaxed))
         if activeCount == 0 {
             currentGain = target
+            toneL.reset()
+            toneR.reset()
             return false
+        }
+
+        if toneActive {
+            for i in 0..<frameCount {
+                left[i] = toneL.process(left[i])
+                if let right { right[i] = toneR.process(right[i]) }
+            }
         }
 
         var g = currentGain

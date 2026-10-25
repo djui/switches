@@ -11,6 +11,8 @@ final class TriggerPipeline: Sendable {
         var layout = KeyLayout()
         var spatialWidth: Float = 0.7
         var pitchVariance: Float = 0.03
+        /// Fixed playback-rate ratio from the pitch setting.
+        var pitchShift: Float = 1
         var volumeVarianceDb: Float = 1.5
         var upGain: Float = 0.63
         var ignoreAutorepeat = true
@@ -37,7 +39,7 @@ final class TriggerPipeline: Sendable {
 
             let pitchRange = max(c.pitchVariance, 0)
             let gainRange = max(c.volumeVarianceDb, 0)
-            let pitch = 1 + Float.random(in: -pitchRange...pitchRange, using: &c.rng)
+            let pitch = c.pitchShift * (1 + Float.random(in: -pitchRange...pitchRange, using: &c.rng))
             let db = Float.random(in: -gainRange...gainRange, using: &c.rng)
             var gain = powf(10, db / 20)
             if !event.isDown { gain *= c.upGain }
@@ -187,12 +189,17 @@ public final class EngineController {
     private func applySettings() {
         mixer.setMasterGain(appState.masterGain)
         mixer.setHeadphoneMode(appState.headphoneMode)
+        mixer.setTone(
+            bassDb: Float(min(max(appState.bassDb, -12), 12)),
+            trebleDb: Float(min(max(appState.trebleDb, -12), 12))
+        )
 
         let kind = appState.keyboardLayout
         let layout: KeyLayout? = kind == layoutKind ? nil : KeyLayout(kind: kind)
         layoutKind = kind
         let spatialWidth = Float(min(max(appState.spatialWidth, 0), 1))
         let pitchVariance = Float(min(max(appState.pitchVariance, 0), 0.25))
+        let pitchShift = powf(2, Float(min(max(appState.pitchSemitones, -12), 12)) / 12)
         let volumeVarianceDb = Float(min(max(appState.volumeVarianceDb, 0), 12))
         let upGain = powf(10, Float(appState.upGainDb) / 20)
         let ignoreAutorepeat = appState.ignoreAutorepeat
@@ -200,6 +207,7 @@ public final class EngineController {
             if let layout { c.layout = layout }
             c.spatialWidth = spatialWidth
             c.pitchVariance = pitchVariance
+            c.pitchShift = pitchShift
             c.volumeVarianceDb = volumeVarianceDb
             c.upGain = upGain
             c.ignoreAutorepeat = ignoreAutorepeat

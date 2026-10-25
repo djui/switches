@@ -110,40 +110,59 @@ private struct SoundSettingsView: View {
 
             Section("Spatial") {
                 LabeledContent("Stereo width") {
-                    PercentSlider(value: $appState.spatialWidth, range: 0...1)
+                    ValueSlider(value: $appState.spatialWidth, range: 0...1) {
+                        "\(Int(($0 * 100).rounded()))%"
+                    }
                 }
                 Toggle("Headphone mode (adds interaural delay)", isOn: $appState.headphoneMode)
             }
 
-            Section("Variation") {
-                LabeledContent("Pitch variation") {
-                    HStack {
-                        Slider(value: $appState.pitchVariance, in: 0...0.1)
-                        Text("±\(Int((appState.pitchVariance * 100).rounded()))%")
-                            .monospacedDigit()
-                            .frame(width: 44, alignment: .trailing)
+            Section {
+                LabeledContent("Pitch") {
+                    ValueSlider(value: $appState.pitchSemitones, range: -12...12, step: 1,
+                                onRelease: controller.playPreview) {
+                        "\(signed($0)) st"
                     }
-                    .frame(width: 260)
+                }
+                LabeledContent("Bass") {
+                    ValueSlider(value: $appState.bassDb, range: -12...12, step: 1,
+                                onRelease: controller.playPreview) {
+                        "\(signed($0)) dB"
+                    }
+                }
+                LabeledContent("Treble") {
+                    ValueSlider(value: $appState.trebleDb, range: -12...12, step: 1,
+                                onRelease: controller.playPreview) {
+                        "\(signed($0)) dB"
+                    }
+                }
+            } header: {
+                SectionHeader(title: "Tone") { appState.resetTone() }
+            } footer: {
+                Text("Pitch shifts every sound up or down (lower also rings a little longer). Bass and treble shape the tone without changing timing.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+
+            Section {
+                LabeledContent("Pitch variation") {
+                    ValueSlider(value: $appState.pitchVariance, range: 0...0.1) {
+                        "±\(Int(($0 * 100).rounded()))%"
+                    }
                 }
                 LabeledContent("Volume variation") {
-                    HStack {
-                        Slider(value: $appState.volumeVarianceDb, in: 0...6)
-                        Text(String(format: "±%.1f dB", appState.volumeVarianceDb))
-                            .monospacedDigit()
-                            .frame(width: 64, alignment: .trailing)
+                    ValueSlider(value: $appState.volumeVarianceDb, range: 0...6) {
+                        String(format: "±%.1f dB", $0)
                     }
-                    .frame(width: 260)
                 }
                 LabeledContent("Key-up level") {
-                    HStack {
-                        Slider(value: $appState.upGainDb, in: -24...0)
-                        Text(String(format: "%.0f dB", appState.upGainDb))
-                            .monospacedDigit()
-                            .frame(width: 64, alignment: .trailing)
+                    ValueSlider(value: $appState.upGainDb, range: -24...0) {
+                        "\(signed($0)) dB"
                     }
-                    .frame(width: 260)
                 }
                 Toggle("Ignore key auto-repeat", isOn: $appState.ignoreAutorepeat)
+            } header: {
+                SectionHeader(title: "Variation") { appState.resetVariation() }
             }
 
             Section {
@@ -161,18 +180,52 @@ private struct SoundSettingsView: View {
     }
 }
 
-private struct PercentSlider: View {
+/// "+3", "−3" or "0", with a typographic minus.
+private func signed(_ value: Double) -> String {
+    let n = Int(value.rounded())
+    return n > 0 ? "+\(n)" : n < 0 ? "−\(-n)" : "0"
+}
+
+/// Slider with a fixed-width readout, so every slider in the form has the same length.
+private struct ValueSlider: View {
     @Binding var value: Double
     let range: ClosedRange<Double>
+    var step: Double? = nil
+    var onRelease: (() -> Void)? = nil
+    let format: (Double) -> String
 
     var body: some View {
         HStack {
-            Slider(value: $value, in: range)
-            Text("\(Int((value * 100).rounded()))%")
+            Group {
+                if let step {
+                    Slider(value: $value, in: range, step: step, onEditingChanged: editingChanged)
+                } else {
+                    Slider(value: $value, in: range, onEditingChanged: editingChanged)
+                }
+            }
+            Text(format(value))
                 .monospacedDigit()
-                .frame(width: 44, alignment: .trailing)
+                .frame(width: 64, alignment: .trailing)
         }
         .frame(width: 260)
+    }
+
+    private func editingChanged(_ editing: Bool) {
+        if !editing { onRelease?() }
+    }
+}
+
+private struct SectionHeader: View {
+    let title: String
+    let reset: () -> Void
+
+    var body: some View {
+        HStack {
+            Text(title)
+            Spacer()
+            Button("Reset", action: reset)
+                .controlSize(.small)
+        }
     }
 }
 
